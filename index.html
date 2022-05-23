@@ -55,9 +55,19 @@
               src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
               alt=""
             />
-            <input type="text" placeholder="What's happening?" />
+            <input
+              id="word"
+              name="twt"
+              oninput="countWord()"
+              type="text"
+              placeholder="What's happening?"
+            />
           </div>
           <button class="tweetBox__tweetButton">Tweet</button>
+          <p style="margin-left: 10px">
+            Word Limit:
+            <span id="show">120</span>
+          </p>
         </form>
       </div>
       <!-- tweetbox ends -->
@@ -99,12 +109,13 @@
         <input type="text" placeholder="Search Twitter" />
       </div>
 
-      <!-- <div class="widgets__widgetContainer">
-        <h2>What's happening?</h2>
+      <div class="widgets__widgetContainer">
+        <h2>What's happening around the globe?</h2>
         <blockquote class="twitter-tweet">
           <p lang="en" dir="ltr">
             Sunsets don&#39;t get much better than this one over
-            <a href="https://twitter.com/GrandTetonNPS?ref_src=twsrc%5Etfw"
+            <a
+              href="https://twitter.com/jairbolsonaro/status/1527673136065429504"
               >@GrandTetonNPS</a
             >.
             <a
@@ -128,8 +139,39 @@
           src="https://platform.twitter.com/widgets.js"
           charset="utf-8"
         ></script>
-      </div> -->
+      </div>
     </div>
     <!-- widgets ends -->
+
+    <script>
+      function countWord() {
+        // Get the input text value
+        var words = document.getElementById("word").value;
+
+        // Initialize the word counter
+        var count = 0;
+        var remain = 120;
+
+        // Split the words on each
+        // space character
+        var split = words.split(" ");
+
+        // Loop through the words and
+        // increase the counter when
+        // each split word is not empty
+        for (var i = 0; i < split.length; i++) {
+          if (split[i] != "") {
+            count += 1;
+            remain -= 1;
+            if (remain < 0) {
+              alert("You have reached the max word limit");
+            }
+          }
+        }
+
+        // Display it as output
+        document.getElementById("show").innerHTML = remain;
+      }
+    </script>
   </body>
 </html>
